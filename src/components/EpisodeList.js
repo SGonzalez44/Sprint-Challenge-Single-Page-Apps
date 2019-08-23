@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import LocationCard from "./LocationCard";
+import EpisodeCard from "./EpisodeCard";
 
-export default function LocationsList() {
-    const [locations, setLocations] = useState([]);
+export default function EpisodeList() {
+    const [episodes, setEpisodes] = useState([]);
 
     useEffect(() => {
         // TODO: Add API Request here - must run in `useEffect`
-        axios.get("https://rickandmortyapi.com/api/location/")
+        axios.get("https://rickandmortyapi.com/api/episode/")
         .then( res => {
         console.log(res);
-        setLocations(res.data.results);
+        setEpisodes(res.data.results);
         })
         .catch( err => console.log("Error:", err));
         //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
@@ -18,7 +18,7 @@ export default function LocationsList() {
 
     return (
         <section className="character-list grid-view">
-        {locations.map( locInfo => <LocationCard key={locInfo.id} name={locInfo.name} residents={locInfo.residents} type={locInfo.type} dimension={locInfo.dimension} id={locInfo.id}/>)}
+{episodes.map( epInfo => <EpisodeCard key={epInfo.id} id={epInfo.id} name={epInfo.name} episode={epInfo.episode} airDate={epInfo["air_date"]}/>)}
         </section>
     );
 }
